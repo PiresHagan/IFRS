@@ -1,6 +1,5 @@
 import { createHashRouter } from "react-router-dom";
-import DashboardLayout from "@layout/index";
-import BotLayout from "@layout/BotLayout";
+import AppLayout from "@layout/AppLayout";
 import LoginRoot from "@pages/login/root";
 import SettingsRoot from "@pages/settings/General";
 import RegisterRoot from "@pages/register";
@@ -9,53 +8,64 @@ import { QueryBoundaries } from "@components/Common/QueryBoundaries";
 import SettingsApplicationRoot from "@pages/settings/application";
 import SettingsTeamsRoot from "@pages/teams/teams";
 import PrivateRoute from "./privateRoute/PrivateRoute";
-
+import ModelDefinitions from "@pages/model-definitions";
+import NotFound from "@pages/not-found";
+  
 const router = createHashRouter([
   {
-    path: "/settings",
-    element: (
-      <PrivateRoute>
-        <DashboardLayout>
-          <QueryBoundaries>
-            <SettingsRoot />
-          </QueryBoundaries>
-        </DashboardLayout>
-      </PrivateRoute>
-    ),
-  },
-  {
-    path: "/settings/application",
-    element: (
-      <PrivateRoute>
-        <DashboardLayout>
-          <QueryBoundaries>
-            <SettingsApplicationRoot />
-          </QueryBoundaries>
-        </DashboardLayout>
-      </PrivateRoute>
-    ),
-  },
-  {
-    path: "/teams",
-    element: (
-      <PrivateRoute>
-        <BotLayout>
-          <SettingsTeamsRoot />
-        </BotLayout>
-      </PrivateRoute>
-    ),
-  },
-  {
-    path: "/login",
-    element: <LoginRoot />,
-  },
-  {
-    path: "/register",
-    element: <RegisterRoot />,
-  },
-  {
-    path: "/resetPassword",
-    element: <ResetPasswordRoot />,
+    element: <AppLayout />,
+    children: [
+      {
+        path: "/",
+        element: (
+          <ModelDefinitions />
+        ),
+      },
+      {
+        path: "/teams",
+        element: (
+          <PrivateRoute>
+            <SettingsTeamsRoot />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/settings",
+        element: (
+          <PrivateRoute>
+            <QueryBoundaries>
+              <SettingsRoot />
+            </QueryBoundaries>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/settings/application",
+        element: (
+          <PrivateRoute>
+            <QueryBoundaries>
+              <SettingsApplicationRoot />
+            </QueryBoundaries>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/login",
+        element: <LoginRoot />,
+      },
+      {
+        path: "/register",
+        element: <RegisterRoot />,
+      },
+      {
+        path: "/resetPassword",
+        element: <ResetPasswordRoot />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
   },
 ]);
 
