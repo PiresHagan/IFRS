@@ -22,7 +22,7 @@ const NotFound = () => {
             className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg flex items-center justify-center transition-colors"
           >
             <HomeIcon className="w-5 h-5 mr-2" />
-            Back to Model Definitions
+            Back to Model Definition
           </Link>
           
           <button
