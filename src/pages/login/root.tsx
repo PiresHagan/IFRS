@@ -5,8 +5,7 @@ export default function LoginRoot() {
   return (
     <QueryBoundaries>
       {" "}
-      {/* <AuthLogin /> */}
-      <div>Login</div>
+      <AuthLogin />
     </QueryBoundaries>
   );
 }

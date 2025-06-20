@@ -16,6 +16,11 @@ export const resetPassword = async (values: any): Promise<ResetPasswordResponse>
   return response as unknown as ResetPasswordResponse;
 };
 
+export const resetPasswordConfirm = async (values: any): Promise<ResetPasswordResponse> => {
+  const response = await api.post("/auth/password/reset/confirm/", values);
+  return response as unknown as ResetPasswordResponse;
+};
+
 export const updateProfile = async (values: any): Promise<any> => {
   const response = await api.put("/auth/user/", values);
   return response;

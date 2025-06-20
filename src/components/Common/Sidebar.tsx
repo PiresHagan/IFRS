@@ -1,11 +1,16 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@context/AuthContext";
+import { Menu, Transition } from "@headlessui/react";
+import { Fragment } from "react";
 import {
   CubeIcon,
   CircleStackIcon,
   ChartBarIcon,
   ArrowDownTrayIcon,
   CogIcon,
+  UserIcon,
+  ArrowRightOnRectangleIcon,
+  UsersIcon,
 } from "@heroicons/react/24/outline";
 
 const navigationItems = [
@@ -31,9 +36,22 @@ const navigationItems = [
   },
 ];
 
+const adminNavigationItems = [
+  {
+    name: "Teams",
+    href: "/teams",
+    icon: UsersIcon,
+  },
+];
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
 const Sidebar = () => {
   const location = useLocation();
-  const { profile } = useAuth();
+  const navigate = useNavigate();
+  const { profile, logout } = useAuth();
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -42,10 +60,21 @@ const Sidebar = () => {
     return location.pathname.startsWith(href);
   };
 
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
+  };
+
+  // Combine navigation items with admin items if user is administrator
+  const allNavigationItems = [
+    ...navigationItems,
+    ...(profile?.isAdministrator ? adminNavigationItems : [])
+  ];
+
   return (
     <div className="w-16 h-full bg-white border-r border-gray-200 flex flex-col">
       <nav className="flex-1 px-2 py-4 space-y-1">
-        {navigationItems.map((item) => {
+        {allNavigationItems.map((item) => {
           const active = isActive(item.href);
           return (
             <Link
@@ -80,7 +109,7 @@ const Sidebar = () => {
         })}
       </nav>
 
-      <div className="px-2 py-4 space-y-2 border-gray-200">
+      <div className="px-2 py-4 space-y-2 border-t border-gray-200">
         <Link
           to="/settings"
           className={`
@@ -108,11 +137,55 @@ const Sidebar = () => {
           />
         </Link>
 
-        <div className="flex items-center justify-center w-12 h-12">
-          <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-medium">
-            {profile?.username?.slice(0, 2).toUpperCase() || "U"}
+        <Menu as="div" className="relative">
+          <div>
+            <Menu.Button className="flex items-center justify-center w-12 h-12 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
+              <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-medium hover:bg-blue-700 transition-colors">
+                {profile?.username?.slice(0, 2).toUpperCase() || "U"}
+              </div>
+            </Menu.Button>
           </div>
-        </div>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-200"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Menu.Items className="absolute bottom-0 left-16 z-10 mb-0 w-48 origin-bottom-left rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    className={classNames(
+                      active ? "bg-gray-100" : "",
+                      "flex items-center px-4 py-2 text-sm text-gray-700"
+                    )}
+                    to="/settings"
+                  >
+                    <UserIcon className="w-4 h-4 mr-3" />
+                    Profile
+                  </Link>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    className={classNames(
+                      active ? "bg-gray-100" : "",
+                      "flex items-center w-full text-left px-4 py-2 text-sm text-gray-700"
+                    )}
+                    onClick={handleLogout}
+                  >
+                    <ArrowRightOnRectangleIcon className="w-4 h-4 mr-3" />
+                    Logout
+                  </button>
+                )}
+              </Menu.Item>
+            </Menu.Items>
+          </Transition>
+        </Menu>
       </div>
     </div>
   );

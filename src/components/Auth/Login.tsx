@@ -60,14 +60,6 @@ export const AuthLogin = () => {
       <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:w-96">
           <div>
-            <div className="focus:outline-none focus-visible:ring-2 focus-visible:ring-pink-700 flex items-center">
-              <img className="h-8 w-auto" src="/logo.png" alt="ScaffoldGPT" />
-              <span className="text-lg font-bold">ScaffoldGPT</span>
-              <span className="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800 ml-2">
-                {/* @ts-ignore */}
-                {`v${__APP_VERSION__}`}
-              </span>
-            </div>
             <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Login to your account
             </h2>

@@ -10,6 +10,7 @@ import SettingsTeamsRoot from "@pages/teams/teams";
 import PrivateRoute from "./privateRoute/PrivateRoute";
 import ModelDefinitions from "@pages/model-definitions";
 import NotFound from "@pages/not-found";
+import { AuthPasswordRecoveryConfirm } from "@components/Auth/PasswordRecovery";
   
 const router = createHashRouter([
   {
@@ -18,7 +19,9 @@ const router = createHashRouter([
       {
         path: "/",
         element: (
-          <ModelDefinitions />
+          <PrivateRoute>
+            <ModelDefinitions />
+          </PrivateRoute>
         ),
       },
       {
@@ -30,7 +33,7 @@ const router = createHashRouter([
         ),
       },
       {
-        path: "/settings",
+        path: "/setting",
         element: (
           <PrivateRoute>
             <QueryBoundaries>
@@ -40,7 +43,7 @@ const router = createHashRouter([
         ),
       },
       {
-        path: "/settings/application",
+        path: "/setting/application",
         element: (
           <PrivateRoute>
             <QueryBoundaries>
@@ -60,6 +63,10 @@ const router = createHashRouter([
       {
         path: "/resetPassword",
         element: <ResetPasswordRoot />,
+      },
+      {
+        path: "/password-recovery/confirm/:uid/:token",
+        element: <AuthPasswordRecoveryConfirm />,
       },
       {
         path: "*",

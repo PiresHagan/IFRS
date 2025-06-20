@@ -208,16 +208,16 @@ export default function Teams() {
               <h2 className="text-base font-semibold leading-7 text-gray-900">
                 All Users
               </h2>
-              <button
+              {/* <button
                 type="button"
                 onClick={openAddUserModal}
                 className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Add New User
-              </button>
+              </button> */}
             </div>
             <p className="mt-1 text-sm leading-6 text-gray-500">
-              Manage all users in your ScaffoldGPT Application
+              Manage all users
             </p>
 
             <dl className="mt-6 space-y-6 divide-y divide-gray-100   text-sm leading-6 ">

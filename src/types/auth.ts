@@ -10,6 +10,7 @@ export interface User {
     dateJoined: string;
     isSuperuser: boolean;
     isStaff: boolean;
+    isAdministrator: boolean;
 }
   
 export interface LoginResponse {

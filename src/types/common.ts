@@ -1,4 +1,5 @@
 import { AppearanceType } from "./config";
+import { User } from "./auth";
 
 export interface PrivateRouteProps {
     children: React.ReactNode;
@@ -24,6 +25,8 @@ export type AuthProviderProps = {
 export type Profile = {
     username: string;
     avatar: string;
+    user: User;
+    isAdministrator: boolean;
 };
 
 export interface AppContextInterface {
@@ -32,7 +35,7 @@ export interface AppContextInterface {
     login: (
       token: string,
       refresh: string,
-      profile: any,
+      user: User,
       appearanceData: AppearanceType
     ) => void;
     logout: () => void;

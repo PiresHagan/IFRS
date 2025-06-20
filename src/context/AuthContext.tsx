@@ -7,18 +7,22 @@ import { logout as logoutService } from "@services/auth";
 import { AppearanceType } from "@/types/config";
 import { showErrorNotification } from "@utils/errorHandler";
 import { AppContextInterface, AuthProviderProps, Profile } from "@/types/common";
+import { User } from "@/types/auth";
 
 const AuthContext = createContext<AppContextInterface>({
   profile: {
     username: "...",
     avatar:
       "https://avatars.dicebear.com/api/jdenticon/formshet.svg?background=%230000ff",
+    user: {} as User,
+    isAdministrator: false,
   },
   isLogged: false,
   login: () => { },
   logout: () => { },
   chatAppearance: null,
 });
+
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useCookie("token");
   const [refresh, setRefresh] = useCookie("reToken");
@@ -33,9 +37,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   React.useEffect(() => {
     if (localProfile) {
+      const user = localProfile?.user || localProfile;
       setProfile({
-        username: localProfile?.username,
-        avatar: `https://api.dicebear.com/5.x/fun-emoji/svg?seed=${localProfile?.username}`,
+        username: user?.username || user?.email || "User",
+        avatar: `https://api.dicebear.com/5.x/fun-emoji/svg?seed=${user?.username || user?.email || "user"}`,
+        user: user,
+        isAdministrator: user?.isAdministrator || user?.role === "Administrator" || false,
       });
     }
     if (appearance) {
@@ -46,12 +53,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = async (
     access: string,
     refresh: string,
-    profile: any,
+    user: User,
     appearanceData: AppearanceType
   ) => {
     setToken(access);
     setRefresh(refresh);
-    setLocalProfile(profile);
+    setLocalProfile(user);
     setAppearance(appearanceData);
   };
 
@@ -64,6 +71,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setToken(null);
       setProfile(null);
       setAppearance(null);
+      setLocalProfile(null);
     } catch (error) {
       showErrorNotification(error, "Logout Failed", "Failed to complete logout process");
     }
