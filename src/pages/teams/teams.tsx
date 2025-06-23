@@ -183,11 +183,11 @@ export default function Teams() {
   const toggleRemoveUser = () => setRemoveModal(!removeUserModal);
   const toggleUserStatus = () => setStatusModal(!statusModal);
 
-  const openAddUserModal = () => {
-    setModalMode("Add");
-    newUser.resetFields();
-    toggleUserModal();
-  };
+  // const openAddUserModal = () => {
+  //   setModalMode("Add");
+  //   newUser.resetFields();
+  //   toggleUserModal();
+  // };
 
   const openUpdateUserModal = (user: User) => {
     setModalMode("Update");

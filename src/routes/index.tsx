@@ -33,7 +33,7 @@ const router = createHashRouter([
         ),
       },
       {
-        path: "/setting",
+        path: "/settings",
         element: (
           <PrivateRoute>
             <QueryBoundaries>
@@ -43,7 +43,7 @@ const router = createHashRouter([
         ),
       },
       {
-        path: "/setting/application",
+        path: "/settings/application",
         element: (
           <PrivateRoute>
             <QueryBoundaries>
