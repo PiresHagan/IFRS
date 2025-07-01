@@ -9,6 +9,7 @@ import SettingsApplicationRoot from "@pages/settings/application";
 import SettingsTeamsRoot from "@pages/teams/teams";
 import PrivateRoute from "./privateRoute/PrivateRoute";
 import ModelDefinitions from "@pages/model-definitions";
+import ModelDefinitionEditor from "@pages/model-definitions/editor";
 import NotFound from "@pages/not-found";
 import { AuthPasswordRecoveryConfirm } from "@components/Auth/PasswordRecovery";
   
@@ -21,6 +22,16 @@ const router = createHashRouter([
         element: (
           <PrivateRoute>
             <ModelDefinitions />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/model-definitions/:id",
+        element: (
+          <PrivateRoute>
+            <QueryBoundaries>
+              <ModelDefinitionEditor />
+            </QueryBoundaries>
           </PrivateRoute>
         ),
       },
