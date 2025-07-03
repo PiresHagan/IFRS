@@ -1,5 +1,4 @@
 import React from 'react';
-import { ModelDefinition } from '@/types/modelDefinition';
 import { GeneralInfoTabProps } from '@/types/modelDefinitionComponents';
 
 const GeneralInfoTab: React.FC<GeneralInfoTabProps> = ({ model, onUpdate, canEdit }) => {
@@ -11,18 +10,8 @@ const GeneralInfoTab: React.FC<GeneralInfoTabProps> = ({ model, onUpdate, canEdi
         [field]: value
       }
     };
+    
     onUpdate({ config: updatedConfig });
-  };
-
-  const handleBasicFieldUpdate = (field: keyof ModelDefinition, value: any) => {
-    if (field === 'name') {
-      handleConfigUpdate('modelName', value);
-    } else if (field === 'description') {
-      handleConfigUpdate('description', value);
-    } else if (field === 'status') {
-      handleConfigUpdate('status', value);
-    }
-    onUpdate({ [field]: value });
   };
 
   const generalInfo = model.config.generalInfo || {} as any;
@@ -39,9 +28,9 @@ const GeneralInfoTab: React.FC<GeneralInfoTabProps> = ({ model, onUpdate, canEdi
             </label>
             <input
               type="text"
-              value={model.name}
-              onChange={(e) => handleBasicFieldUpdate('name', e.target.value)}
-              disabled={!canEdit}
+              value={generalInfo.modelName || model.name || ''}
+              onChange={(e) => handleConfigUpdate('modelName', e.target.value)}
+              disabled
               placeholder="e.g., Term Life GMM Base Model"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:text-gray-500"
             />
@@ -66,8 +55,8 @@ const GeneralInfoTab: React.FC<GeneralInfoTabProps> = ({ model, onUpdate, canEdi
             Description
           </label>
           <textarea
-            value={model.description || ''}
-            onChange={(e) => handleBasicFieldUpdate('description', e.target.value)}
+            value={generalInfo.description || ''}
+            onChange={(e) => handleConfigUpdate('description', e.target.value)}
             disabled={!canEdit}
             rows={3}
             placeholder="Notes about assumptions, changes, or version intent"
@@ -81,7 +70,7 @@ const GeneralInfoTab: React.FC<GeneralInfoTabProps> = ({ model, onUpdate, canEdi
               Product Type <span className="text-red-500">*</span>
             </label>
             <select
-              value={generalInfo.productType || model.productType || ''}
+              value={generalInfo.productType || ''}
               onChange={(e) => handleConfigUpdate('productType', e.target.value)}
               disabled={!canEdit}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:text-gray-500"
@@ -103,7 +92,7 @@ const GeneralInfoTab: React.FC<GeneralInfoTabProps> = ({ model, onUpdate, canEdi
               Measurement Model <span className="text-red-500">*</span>
             </label>
             <select
-              value={generalInfo.measurementModel || model.measurementModel || ''}
+              value={generalInfo.measurementModel || ''}
               onChange={(e) => handleConfigUpdate('measurementModel', e.target.value)}
               disabled={!canEdit}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:text-gray-500"
@@ -123,7 +112,7 @@ const GeneralInfoTab: React.FC<GeneralInfoTabProps> = ({ model, onUpdate, canEdi
             </label>
             <input
               type="text"
-              value={model.createdBy || 'Unknown'}
+              value={model.createdByName || 'Unknown'}
               disabled={true}
               className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-500"
             />
@@ -157,11 +146,25 @@ const GeneralInfoTab: React.FC<GeneralInfoTabProps> = ({ model, onUpdate, canEdi
           
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
+              Last Modified By
+            </label>
+            <input
+              type="text"
+              value={model.lastModifiedByName || 'Unknown'}
+              disabled={true}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-500"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Status <span className="text-red-500">*</span>
             </label>
             <select
-              value={model.status || 'draft'}
-              onChange={(e) => handleBasicFieldUpdate('status', e.target.value)}
+              value={generalInfo.status || 'draft'}
+              onChange={(e) => handleConfigUpdate('status', e.target.value)}
               disabled={!canEdit}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:text-gray-500"
             >
@@ -169,6 +172,10 @@ const GeneralInfoTab: React.FC<GeneralInfoTabProps> = ({ model, onUpdate, canEdi
               <option value="active">Active</option>
               <option value="locked">Locked</option>
             </select>
+          </div>
+          
+          <div>
+            
           </div>
         </div>
 

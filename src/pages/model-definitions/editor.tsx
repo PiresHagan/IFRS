@@ -157,9 +157,8 @@ const ModelDefinitionEditor = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      
-      <div className="bg-white shadow">
-        <div className="px-6 py-4">
+      <div className="fixed top-16 left-16 right-0 bg-white shadow-sm border-b z-40">
+        <div className="px-6 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <button
@@ -180,11 +179,11 @@ const ModelDefinitionEditor = () => {
                   </span>
                   <span className="text-sm text-gray-400">•</span>
                   <span className="text-sm text-blue-600">
-                    {currentModel.measurementModel}
+                    {currentModel.config?.generalInfo?.measurementModel || ''}
                   </span>
                   <span className="text-sm text-gray-400">•</span>
                   <span className="text-sm text-gray-600">
-                    {currentModel.productType}
+                    {currentModel.config?.generalInfo?.productType || ''}
                   </span>
                 </div>
               </div>
@@ -234,132 +233,146 @@ const ModelDefinitionEditor = () => {
         </div>
       </div>
 
-      <div className="px-6 py-6">
-        <Tab.Group onChange={(index) => setCurrentTab(tabs[index].key)}>
-          <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1 mb-6">
+      <Tab.Group onChange={(index) => setCurrentTab(tabs[index].key)}>
+        <div className="fixed top-36 left-16 right-0 bg-white border-b border-gray-200 z-30">
+          <Tab.List className="flex items-center justify-between">
             {tabs.map((tab) => (
               <Tab
                 key={tab.key}
                 className={({ selected }) =>
-                  `w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700 transition-all duration-200 ${
+                  `relative px-6 py-4 text-sm font-medium whitespace-nowrap focus:outline-none transition-colors duration-200 ${
                     selected
-                      ? 'bg-white shadow'
-                      : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                      ? 'text-blue-600 border-b-2 border-blue-600'
+                      : 'text-gray-500 hover:text-gray-700 border-b-2 border-transparent hover:border-gray-300'
                   }`
                 }
               >
-                <span className="flex items-center justify-center">
-                  <span className="mr-2">{tab.icon}</span>
-                  <span className="hidden sm:inline">{tab.name.split(' ').slice(1).join(' ')}</span>
-                  <span className="sm:hidden">{tab.icon}</span>
-                </span>
+                {tab.name}
               </Tab>
             ))}
           </Tab.List>
+        </div>
 
+        <div className="px-2" style={{paddingTop: '9rem'}}>
           <Tab.Panels>
-            <Tab.Panel className="bg-white rounded-lg shadow p-6">
-              <GeneralInfoTab
-                model={currentModel}
-                onUpdate={(updates) => {
-                  if (updates.config) {
-                    updateConfig(updates.config);
-                  } else {
-                    const updatedModel = { ...currentModel, ...updates };
-                    setCurrentModel(updatedModel);
-                    setHasUnsavedChanges(true);
-                  }
-                }}
-                canEdit={currentModel.canEdit}
-              />
-            </Tab.Panel>
+              <Tab.Panel className="bg-white">
+                <div className="px-6 py-6">
+                  <GeneralInfoTab
+                    model={currentModel}
+                    onUpdate={(updates) => {
+                      if (updates.config) {
+                        updateConfig(updates.config);
+                      } else {
+                        const updatedModel = { ...currentModel, ...updates };
+                        setCurrentModel(updatedModel);
+                        setHasUnsavedChanges(true);
+                      }
+                    }}
+                    canEdit={currentModel.canEdit}
+                  />
+                </div>
+              </Tab.Panel>
 
-            <Tab.Panel className="bg-white rounded-lg shadow p-6">
-              <FormulaMappingTab
-                model={currentModel}
-                onUpdate={(updates) => {
-                  if (updates.config) {
-                    updateConfig(updates.config);
-                  }
-                }}
-                canEdit={currentModel.canEdit}
-              />
-            </Tab.Panel>
-            
-            <Tab.Panel className="bg-white rounded-lg shadow p-6">
-              <ProjectionAssumptionsTab
-                model={currentModel}
-                onUpdate={(updates) => {
-                  if (updates.config) {
-                    updateConfig(updates.config);
-                  }
-                }}
-                canEdit={currentModel.canEdit}
-              />
-            </Tab.Panel>
+              <Tab.Panel className="bg-white">
+                <div className="px-6 py-6">
+                  <FormulaMappingTab
+                    model={currentModel}
+                    onUpdate={(updates) => {
+                      if (updates.config) {
+                        updateConfig(updates.config);
+                      }
+                    }}
+                    canEdit={currentModel.canEdit}
+                  />
+                </div>
+              </Tab.Panel>
+              
+              <Tab.Panel className="bg-white">
+                <div className="px-6 py-6">
+                  <ProjectionAssumptionsTab
+                    model={currentModel}
+                    onUpdate={(updates) => {
+                      if (updates.config) {
+                        updateConfig(updates.config);
+                      }
+                    }}
+                    canEdit={currentModel.canEdit}
+                  />
+                </div>
+              </Tab.Panel>
 
-            <Tab.Panel className="bg-white rounded-lg shadow p-6">
-              <RiskAdjustmentTab
-                model={currentModel}
-                onUpdate={(updates) => {
-                  if (updates.config) {
-                    updateConfig(updates.config);
-                  }
-                }}
-                canEdit={currentModel.canEdit}
-              />
-            </Tab.Panel>
+              <Tab.Panel className="bg-white">
+                <div className="px-6 py-6">
+                  <RiskAdjustmentTab
+                    model={currentModel}
+                    onUpdate={(updates) => {
+                      if (updates.config) {
+                        updateConfig(updates.config);
+                      }
+                    }}
+                    canEdit={currentModel.canEdit}
+                  />
+                </div>
+              </Tab.Panel>
 
-            <Tab.Panel className="bg-white rounded-lg shadow p-6">
-              <DiscountRatesTab
-                model={currentModel}
-                onUpdate={(updates) => {
-                  if (updates.config) {
-                    updateConfig(updates.config);
-                  }
-                }}
-                canEdit={currentModel.canEdit}
-              />
-            </Tab.Panel>
+              <Tab.Panel className="bg-white">
+                <div className="px-6 py-6">
+                  <DiscountRatesTab
+                    model={currentModel}
+                    onUpdate={(updates) => {
+                      if (updates.config) {
+                        updateConfig(updates.config);
+                      }
+                    }}
+                    canEdit={currentModel.canEdit}
+                  />
+                </div>
+              </Tab.Panel>
 
-            <Tab.Panel className="bg-white rounded-lg shadow p-6">
-              <AccountingRulesTab
-                model={currentModel}
-                onUpdate={(updates) => {
-                  if (updates.config) {
-                    updateConfig(updates.config);
-                  }
-                }}
-                canEdit={currentModel.canEdit}
-              />
-            </Tab.Panel>
+              <Tab.Panel className="bg-white">
+                <div className="px-6 py-6">
+                  <AccountingRulesTab
+                    model={currentModel}
+                    onUpdate={(updates) => {
+                      if (updates.config) {
+                        updateConfig(updates.config);
+                      }
+                    }}
+                    canEdit={currentModel.canEdit}
+                  />
+                </div>
+              </Tab.Panel>
 
-            <Tab.Panel className="bg-white rounded-lg shadow p-6">
-              <ActuarialRulesTab
-                model={currentModel}
-                onUpdate={(updates) => {
-                  if (updates.config) {
-                    updateConfig(updates.config);
-                  }
-                }}
-                canEdit={currentModel.canEdit}
-              />
-            </Tab.Panel>
+              <Tab.Panel className="bg-white">
+                <div className="px-6 py-6">
+                  <ActuarialRulesTab
+                    model={currentModel}
+                    onUpdate={(updates) => {
+                      if (updates.config) {
+                        updateConfig(updates.config);
+                      }
+                    }}
+                    canEdit={currentModel.canEdit}
+                  />
+                </div>
+              </Tab.Panel>
 
-            <Tab.Panel className="bg-white rounded-lg shadow p-6">
-              <OverridesViewerTab
-                model={currentModel}
-                onUpdate={(updates) => {
-                  if (updates.config) {
-                    updateConfig(updates.config);
-                  }
-                }}
-                canEdit={currentModel.canEdit}
-              />
-            </Tab.Panel>
-          </Tab.Panels>
+              <Tab.Panel className="bg-white">
+                <div className="px-6 py-6">
+                  <OverridesViewerTab
+                    model={currentModel}
+                    onUpdate={(updates) => {
+                      if (updates.config) {
+                        updateConfig(updates.config);
+                      }
+                    }}
+                    canEdit={currentModel.canEdit}
+                  />
+                </div>
+              </Tab.Panel>
+            </Tab.Panels>
+          </div>
         </Tab.Group>
-      </div>
 
       {showUnsavedWarning && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">

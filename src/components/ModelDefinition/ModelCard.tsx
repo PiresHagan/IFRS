@@ -19,6 +19,12 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, onOpen }) => {
   
   const { deleteModel, cloneModel, isLoading } = useModelDefinitionStore();
 
+  const generalInfo = model.config?.generalInfo || {};
+  const description = generalInfo.description || '';
+  const status = generalInfo.status || 'draft';
+  const productType = generalInfo.productType || '';
+  const measurementModel = generalInfo.measurementModel || '';
+
   const handleDelete = async () => {
     const success = await deleteModel(model.id);
     if (success) {
@@ -44,6 +50,17 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, onOpen }) => {
     });
   };
 
+  const formatDateTime = (dateString: string) => {
+    return new Date(dateString).toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+  };
+
   const canEdit = modelDefinitionHelpers.canEdit(model);
 
   return (
@@ -61,19 +78,19 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, onOpen }) => {
                 </span>
                 <span className="text-sm text-gray-400">•</span>
                 <span className="text-sm font-medium text-blue-600">
-                  {model.measurementModel}
+                  {measurementModel}
                 </span>
               </div>
             </div>
             
-            <span className={`px-2 py-1 text-xs font-medium rounded-full ${modelDefinitionHelpers.getStatusColor(model.status)}`}>
-              {model.status}
+            <span className={`px-2 py-1 text-xs font-medium rounded-full ${modelDefinitionHelpers.getStatusColor(status)}`}>
+              {status}
             </span>
           </div>
           
-          {model.description && (
+          {description && (
             <p className="mt-2 text-sm text-gray-600 line-clamp-2">
-              {model.description}
+              {description}
             </p>
           )}
         </div>
@@ -81,7 +98,7 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, onOpen }) => {
         <div className="p-4">
           <div className="mb-3">
             <span className="inline-flex items-center px-2 py-1 text-xs bg-gray-100 text-gray-800 rounded">
-              {model.productType}
+              {productType}
             </span>
           </div>
 
@@ -91,8 +108,12 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, onOpen }) => {
               <span>Created by {model.createdByName}</span>
             </div>
             <div className="flex items-center">
+              <UserIcon className="h-3 w-3 mr-2" />
+              <span>Last modified by {model.lastModifiedByName}</span>
+            </div>
+            <div className="flex items-center">
               <CalendarIcon className="h-3 w-3 mr-2" />
-              <span>Modified {formatDate(model.modifiedOn)}</span>
+              <span>Modified {formatDateTime(model.modifiedOn)}</span>
             </div>
             {model.clonedFromName && (
               <div className="flex items-center">
@@ -183,10 +204,7 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, onOpen }) => {
             </div>
             <div className="flex justify-end space-x-3">
               <button
-                onClick={() => {
-                  setShowCloneDialog(false);
-                  setCloneName('');
-                }}
+                onClick={() => setShowCloneDialog(false)}
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
               >
                 Cancel
@@ -196,7 +214,7 @@ const ModelCard: React.FC<ModelCardProps> = ({ model, onOpen }) => {
                 disabled={!cloneName.trim() || isLoading}
                 className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isLoading ? 'Cloning...' : 'Clone'}
+                {isLoading ? 'Cloning...' : 'Clone Model'}
               </button>
             </div>
           </div>

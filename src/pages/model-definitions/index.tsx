@@ -90,7 +90,7 @@ const ModelDefinitions = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <button
                 onClick={handleCreateNew}
-                className="flex items-center justify-center px-6 py-4 border-2 border-dashed border-blue-300 rounded-lg text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-colors group"
+                className="flex items-center justify-center px-6 py-4 border-2 border-blue-600 rounded-lg text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-colors group"
               >
                 <PlusIcon className="h-8 w-8 mr-3 group-hover:scale-110 transition-transform" />
                 <div className="text-left">
@@ -105,12 +105,12 @@ const ModelDefinitions = () => {
                     document.getElementById('model-search')?.focus();
                   }
                 }}
-                className="flex items-center justify-center px-6 py-4 border-2 border-dashed border-green-300 rounded-lg text-green-600 hover:border-green-400 hover:bg-green-50 transition-colors group"
+                className="flex items-center justify-center px-6 py-4 border-2 border-blue-600 rounded-lg text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-colors group"
               >
                 <FolderOpenIcon className="h-8 w-8 mr-3 group-hover:scale-110 transition-transform" />
                 <div className="text-left">
                   <div className="font-semibold text-lg">Open Existing Model</div>
-                  <div className="text-sm text-green-500">Browse and open saved models</div>
+                  <div className="text-sm text-blue-500">Browse and open saved models</div>
                 </div>
               </button>
             </div>

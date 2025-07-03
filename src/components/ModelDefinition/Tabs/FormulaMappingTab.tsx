@@ -32,8 +32,7 @@ const FormulaMappingTab: React.FC<FormulaMappingTabProps> = ({ model, onUpdate, 
     'LIC roll forward',
     'RA percent of LIC',
     'Claims + acq. costs + RA',
-    'LIC × discount rate',
-    'From previous period'
+    'LIC × discount rate'
   ];
 
   const FormulaTable = ({ 

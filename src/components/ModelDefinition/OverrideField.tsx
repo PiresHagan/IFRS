@@ -6,7 +6,7 @@ import { Override, OverrideFieldProps } from '@/types/modelDefinitionComponents'
 const OverrideField: React.FC<OverrideFieldProps> = ({
   label,
   defaultValue,
-  overrides,
+  overrides = [],
   onUpdateOverrides,
   onUpdateDefault,
   measurementModel,
@@ -91,7 +91,7 @@ const OverrideField: React.FC<OverrideFieldProps> = ({
   };
 
   const handleDeleteOverride = (overrideId: string) => {
-    const updatedOverrides = overrides.filter(o => o.id !== overrideId);
+    const updatedOverrides = (overrides || []).filter(o => o.id !== overrideId);
     onUpdateOverrides(updatedOverrides);
   };
 
@@ -134,7 +134,7 @@ const OverrideField: React.FC<OverrideFieldProps> = ({
             disabled={disabled}
             className={baseClassName}
           >
-            {selectOptions.map(option => (
+            {(selectOptions || []).map(option => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
@@ -193,7 +193,7 @@ const OverrideField: React.FC<OverrideFieldProps> = ({
         </div>
       </div>
 
-      {overrides.length > 0 && (
+      {overrides && overrides.length > 0 && (
         <div className="bg-gray-50 border border-gray-200 rounded-md p-4">
           <h4 className="text-sm font-medium text-gray-900 mb-3">Active Overrides</h4>
           <div className="space-y-2">
@@ -257,7 +257,7 @@ const OverrideField: React.FC<OverrideFieldProps> = ({
                   onChange={(e) => setNewOverride(prev => ({ ...prev, lob: e.target.value }))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  {getLobOptions().map(option => (
+                  {(getLobOptions() || []).map(option => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
@@ -274,7 +274,7 @@ const OverrideField: React.FC<OverrideFieldProps> = ({
                   onChange={(e) => setNewOverride(prev => ({ ...prev, year: e.target.value }))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  {getYearOptions().map(option => (
+                  {(getYearOptions() || []).map(option => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
