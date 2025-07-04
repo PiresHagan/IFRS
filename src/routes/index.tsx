@@ -10,6 +10,12 @@ import SettingsTeamsRoot from "@pages/teams/teams";
 import PrivateRoute from "./privateRoute/PrivateRoute";
 import ModelDefinitions from "@pages/model-definitions";
 import ModelDefinitionEditor from "@pages/model-definitions/editor";
+import GroupInsurance from "@pages/group-insurance";
+import Reinsurance from "@pages/reinsurance";
+import Data from "@pages/data";
+import Reports from "@pages/reports";
+import ExportDisclosures from "@pages/export";
+import HelpGuide from "@pages/help";
 import NotFound from "@pages/not-found";
 import { AuthPasswordRecoveryConfirm } from "@components/Auth/PasswordRecovery";
   
@@ -36,13 +42,61 @@ const router = createHashRouter([
         ),
       },
       {
-        path: "/teams",
+        path: "/group-insurance",
         element: (
           <PrivateRoute>
-            <SettingsTeamsRoot />
+            <GroupInsurance />
           </PrivateRoute>
         ),
       },
+      {
+        path: "/reinsurance",
+        element: (
+          <PrivateRoute>
+            <Reinsurance />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/data",
+        element: (
+          <PrivateRoute>
+            <Data />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/reports",
+        element: (
+          <PrivateRoute>
+            <Reports />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/export",
+        element: (
+          <PrivateRoute>
+            <ExportDisclosures />
+          </PrivateRoute>
+        ),
+      },
+              {
+          path: "/help",
+          element: (
+            <PrivateRoute>
+              <HelpGuide />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "/teams",
+          element: (
+            <PrivateRoute>
+              <SettingsTeamsRoot />
+            </PrivateRoute>
+          ),
+        },
       {
         path: "/settings",
         element: (

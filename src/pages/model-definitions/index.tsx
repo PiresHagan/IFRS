@@ -90,12 +90,12 @@ const ModelDefinitions = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <button
                 onClick={handleCreateNew}
-                className="flex items-center justify-center px-6 py-4 border-2 border-blue-600 rounded-lg text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-colors group"
+                className="flex items-center justify-center px-6 py-4 border-2 border-blue-500 rounded-lg text-blue-500 hover:border-blue-400 hover:bg-blue-50 transition-colors group"
               >
                 <PlusIcon className="h-8 w-8 mr-3 group-hover:scale-110 transition-transform" />
                 <div className="text-left">
-                  <div className="font-semibold text-lg">Create New Model</div>
-                  <div className="text-sm text-blue-500">Start with a blank configuration</div>
+                  <div className="text-lg">Create New Model</div>
+                  <div className="text-sm">Start with a blank configuration</div>
                 </div>
               </button>
 
@@ -105,12 +105,12 @@ const ModelDefinitions = () => {
                     document.getElementById('model-search')?.focus();
                   }
                 }}
-                className="flex items-center justify-center px-6 py-4 border-2 border-blue-600 rounded-lg text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-colors group"
+                className="flex items-center justify-center px-6 py-4 border-2 border-blue-500 rounded-lg text-blue-500 hover:border-blue-400 hover:bg-blue-50 transition-colors group"
               >
                 <FolderOpenIcon className="h-8 w-8 mr-3 group-hover:scale-110 transition-transform" />
                 <div className="text-left">
-                  <div className="font-semibold text-lg">Open Existing Model</div>
-                  <div className="text-sm text-blue-500">Browse and open saved models</div>
+                  <div className="text-lg">Open Existing Model</div>
+                  <div className="text-sm">Browse and open saved models</div>
                 </div>
               </button>
             </div>

@@ -157,7 +157,7 @@ const ModelDefinitionEditor = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="fixed top-16 left-16 right-0 bg-white shadow-sm border-b z-40">
+      <div className="fixed top-0 left-64 right-0 bg-white shadow-sm border-b z-40">
         <div className="px-6 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -233,8 +233,8 @@ const ModelDefinitionEditor = () => {
         </div>
       </div>
 
-      <Tab.Group onChange={(index) => setCurrentTab(tabs[index].key)}>
-        <div className="fixed top-36 left-16 right-0 bg-white border-b border-gray-200 z-30">
+        <Tab.Group onChange={(index) => setCurrentTab(tabs[index].key)}>
+        <div className="fixed top-20 left-64 right-0 bg-white border-b border-gray-200 z-30">
           <Tab.List className="flex items-center justify-between">
             {tabs.map((tab) => (
               <Tab
@@ -257,120 +257,120 @@ const ModelDefinitionEditor = () => {
           <Tab.Panels>
               <Tab.Panel className="bg-white">
                 <div className="px-6 py-6">
-                  <GeneralInfoTab
-                    model={currentModel}
-                    onUpdate={(updates) => {
-                      if (updates.config) {
-                        updateConfig(updates.config);
-                      } else {
-                        const updatedModel = { ...currentModel, ...updates };
-                        setCurrentModel(updatedModel);
-                        setHasUnsavedChanges(true);
-                      }
-                    }}
-                    canEdit={currentModel.canEdit}
-                  />
+              <GeneralInfoTab
+                model={currentModel}
+                onUpdate={(updates) => {
+                  if (updates.config) {
+                    updateConfig(updates.config);
+                  } else {
+                    const updatedModel = { ...currentModel, ...updates };
+                    setCurrentModel(updatedModel);
+                    setHasUnsavedChanges(true);
+                  }
+                }}
+                canEdit={currentModel.canEdit}
+              />
                 </div>
-              </Tab.Panel>
+            </Tab.Panel>
 
               <Tab.Panel className="bg-white">
                 <div className="px-6 py-6">
-                  <FormulaMappingTab
-                    model={currentModel}
-                    onUpdate={(updates) => {
-                      if (updates.config) {
-                        updateConfig(updates.config);
-                      }
-                    }}
-                    canEdit={currentModel.canEdit}
-                  />
+              <FormulaMappingTab
+                model={currentModel}
+                onUpdate={(updates) => {
+                  if (updates.config) {
+                    updateConfig(updates.config);
+                  }
+                }}
+                canEdit={currentModel.canEdit}
+              />
                 </div>
-              </Tab.Panel>
-              
+            </Tab.Panel>
+            
               <Tab.Panel className="bg-white">
                 <div className="px-6 py-6">
-                  <ProjectionAssumptionsTab
-                    model={currentModel}
-                    onUpdate={(updates) => {
-                      if (updates.config) {
-                        updateConfig(updates.config);
-                      }
-                    }}
-                    canEdit={currentModel.canEdit}
-                  />
+              <ProjectionAssumptionsTab
+                model={currentModel}
+                onUpdate={(updates) => {
+                  if (updates.config) {
+                    updateConfig(updates.config);
+                  }
+                }}
+                canEdit={currentModel.canEdit}
+              />
                 </div>
-              </Tab.Panel>
+            </Tab.Panel>
 
               <Tab.Panel className="bg-white">
                 <div className="px-6 py-6">
-                  <RiskAdjustmentTab
-                    model={currentModel}
-                    onUpdate={(updates) => {
-                      if (updates.config) {
-                        updateConfig(updates.config);
-                      }
-                    }}
-                    canEdit={currentModel.canEdit}
-                  />
+              <RiskAdjustmentTab
+                model={currentModel}
+                onUpdate={(updates) => {
+                  if (updates.config) {
+                    updateConfig(updates.config);
+                  }
+                }}
+                canEdit={currentModel.canEdit}
+              />
                 </div>
-              </Tab.Panel>
+            </Tab.Panel>
 
               <Tab.Panel className="bg-white">
                 <div className="px-6 py-6">
-                  <DiscountRatesTab
-                    model={currentModel}
-                    onUpdate={(updates) => {
-                      if (updates.config) {
-                        updateConfig(updates.config);
-                      }
-                    }}
-                    canEdit={currentModel.canEdit}
-                  />
+              <DiscountRatesTab
+                model={currentModel}
+                onUpdate={(updates) => {
+                  if (updates.config) {
+                    updateConfig(updates.config);
+                  }
+                }}
+                canEdit={currentModel.canEdit}
+              />
                 </div>
-              </Tab.Panel>
+            </Tab.Panel>
 
               <Tab.Panel className="bg-white">
                 <div className="px-6 py-6">
-                  <AccountingRulesTab
-                    model={currentModel}
-                    onUpdate={(updates) => {
-                      if (updates.config) {
-                        updateConfig(updates.config);
-                      }
-                    }}
-                    canEdit={currentModel.canEdit}
-                  />
+              <AccountingRulesTab
+                model={currentModel}
+                onUpdate={(updates) => {
+                  if (updates.config) {
+                    updateConfig(updates.config);
+                  }
+                }}
+                canEdit={currentModel.canEdit}
+              />
                 </div>
-              </Tab.Panel>
+            </Tab.Panel>
 
               <Tab.Panel className="bg-white">
                 <div className="px-6 py-6">
-                  <ActuarialRulesTab
-                    model={currentModel}
-                    onUpdate={(updates) => {
-                      if (updates.config) {
-                        updateConfig(updates.config);
-                      }
-                    }}
-                    canEdit={currentModel.canEdit}
-                  />
+              <ActuarialRulesTab
+                model={currentModel}
+                onUpdate={(updates) => {
+                  if (updates.config) {
+                    updateConfig(updates.config);
+                  }
+                }}
+                canEdit={currentModel.canEdit}
+              />
                 </div>
-              </Tab.Panel>
+            </Tab.Panel>
 
               <Tab.Panel className="bg-white">
                 <div className="px-6 py-6">
-                  <OverridesViewerTab
-                    model={currentModel}
-                    onUpdate={(updates) => {
-                      if (updates.config) {
-                        updateConfig(updates.config);
-                      }
-                    }}
-                    canEdit={currentModel.canEdit}
-                  />
+              <OverridesViewerTab
+                model={currentModel}
+                onUpdate={(updates) => {
+                  if (updates.config) {
+                    updateConfig(updates.config);
+                  }
+                }}
+                canEdit={currentModel.canEdit}
+              />
                 </div>
-              </Tab.Panel>
-            </Tab.Panels>
+            </Tab.Panel>
+          </Tab.Panels>
           </div>
         </Tab.Group>
 
