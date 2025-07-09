@@ -9,12 +9,12 @@ const AppLayout = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="flex">
         {isLogged && (
-          <div className="fixed left-0 top-0 h-screen z-40 w-64">
+          <div className="fixed left-0 top-0 h-screen z-40 w-64 hidden lg:block">
             <Sidebar />
           </div>
         )}
         
-        <main className={`flex-1 ${isLogged ? 'ml-64' : ''} min-h-screen`}>
+        <main className={`flex-1 ${isLogged ? 'lg:ml-64' : ''} min-h-screen`}>
           <Outlet />
         </main>
       </div>

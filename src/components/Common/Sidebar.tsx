@@ -118,7 +118,7 @@ const Sidebar = () => {
       <div className="p-2 border-b border-gray-200">
         <div className="flex items-center">
           <img 
-            src="/Logo.png" 
+            src="/logo.png" 
             alt="ActualIQ Logo" 
             className="h-16 w-auto"
           />
@@ -253,7 +253,7 @@ const Sidebar = () => {
               <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-medium mr-3">
                 {profile?.username?.slice(0, 2).toUpperCase() || "U"}
               </div>
-              {/* <span className="text-sm font-medium text-gray-700">{profile?.username || "User"}</span> */}
+              <span className="text-sm font-medium text-gray-700">{`${profile?.user?.firstName} ${profile?.user?.lastName}` || "User"}</span>
             </Menu.Button>
           </div>
           <Transition

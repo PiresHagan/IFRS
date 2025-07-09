@@ -37,6 +37,42 @@ html{
   background: #555;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Show scrollbar on hover */
+.hover\:scrollbar-show:hover::-webkit-scrollbar {
+  display: block;
+  width: 6px;
+  height: 6px;
+}
+
+.hover\:scrollbar-show:hover::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.hover\:scrollbar-show:hover::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.hover\:scrollbar-show:hover::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.hover\:scrollbar-show:hover {
+  scrollbar-width: thin;  /* Firefox */
+  scrollbar-color: #cbd5e1 transparent;  /* Firefox */
+}
+
 @media (max-width: 720px) {
   pre {
     width: calc(100vw - 110px);

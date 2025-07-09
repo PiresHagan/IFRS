@@ -1,14 +1,12 @@
-const Data = () => {
+import React from 'react';
+import DataUploadTabs from '@/components/DataUpload/DataUploadTabs';
+
+const DataPage: React.FC = () => {
   return (
-    <div className="p-6">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Data</h1>
-        <div className="bg-white rounded-lg shadow p-6">
-          <p className="text-gray-600">Data management module - Coming Soon</p>
-        </div>
-      </div>
+    <div className="mx-auto py-8">
+      <DataUploadTabs />
     </div>
   );
 };
 
-export default Data; 
+export default DataPage; 
